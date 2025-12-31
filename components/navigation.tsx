@@ -18,7 +18,7 @@ const Navigation = () => {
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 cursor-pointer">
             <h1 className="text-2xl font-bold gradient-text">
-              Resume Builder
+              Resumify
             </h1>
           </Link>
 
@@ -57,7 +57,7 @@ const Navigation = () => {
               >
                 ATS Score
               </Link>
-             
+
               <Link
                 href="/contact"
                 className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium"
@@ -76,19 +76,24 @@ const Navigation = () => {
                     Profile
                   </Button>
                 </Link>
+                <Link href="/settings">
+                  <Button variant="ghost" size="sm">
+                    Settings
+                  </Button>
+                </Link>
                 <UserProfile />
               </>
             ) : (
               <>
                 <Link href="/auth/signin">
-                  <Button variant="ghost" style={{ cursor:"pointer"}} size="sm">
+                  <Button variant="ghost" style={{ cursor: "pointer" }} size="sm">
                     Sign In
                   </Button>
                 </Link>
                 <Link href="/builder">
-                <Button style={{ cursor:"pointer"}} size="sm">
-                  Start Building
-                </Button>
+                  <Button style={{ cursor: "pointer" }} size="sm">
+                    Start Building
+                  </Button>
                 </Link>
               </>
             )}

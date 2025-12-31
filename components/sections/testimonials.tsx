@@ -10,7 +10,7 @@ const testimonials = [
     name: "Sarah Chen",
     role: "Software Engineer",
     company: "TechCorp Inc.",
-    content: "This resume builder helped me land my dream job at a FAANG company. The ATS optimization feature is incredible!",
+    content: "Resumify helped me land my dream job at a FAANG company. The ATS optimization feature is incredible!",
     rating: 5,
     avatar: "SC"
   },
@@ -70,7 +70,7 @@ export default function TestimonialsSection() {
             Trusted by Professionals Worldwide
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Join thousands of successful job seekers who have transformed their careers with our resume builder.
+            Join thousands of successful job seekers who have transformed their careers with Resumify.
           </p>
         </motion.div>
       </div>

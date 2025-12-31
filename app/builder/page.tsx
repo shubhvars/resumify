@@ -107,15 +107,15 @@ export default function HomePage() {
       if (!res.ok) {
         return { ok: false, error: data?.error || "Failed to fetch GitHub data" }
       }
-      
+
       // Log the GitHub data received
       console.log("fetchGitHub: Received profile data:", data.profile)
       console.log("fetchGitHub: Received repos count:", data.repos?.length)
-      
+
       // Extract the GitHub username (login) from the profile data
       const githubId = data.profile?.login || ""
       console.log("fetchGitHub: GitHub ID (username):", githubId)
-      
+
       setState((s) => {
         const updatedState = {
           ...s,
@@ -167,7 +167,7 @@ export default function HomePage() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const resumeId = urlParams.get('resume');
-    
+
     if (resumeId && session?.user?.id) {
       loadResume(resumeId).then((loadedResume) => {
         if (loadedResume) {
@@ -182,8 +182,8 @@ export default function HomePage() {
       <header className="mb-6">
         <div className="flex items-center justify-between">
           <div>
-        <h1 className="text-pretty text-2xl font-semibold text-foreground">Portfolio Generator</h1>
-        <p className="text-muted-foreground">Create a professional portfolio from your GitHub and experience.</p>
+            <h1 className="text-pretty text-2xl font-semibold text-foreground">Resumify</h1>
+            <p className="text-muted-foreground">Create a professional portfolio from your GitHub and experience.</p>
           </div>
           {session && (
             <div className="flex items-center gap-2">
@@ -212,16 +212,16 @@ export default function HomePage() {
 
         {/* Center: Wizard */}
         <section aria-label="Wizard" className="lg:col-span-2 space-y-4">
-      <div className="mb-4 h-2 w-full rounded-full bg-muted">
-        <div
-          className="h-2 rounded-full bg-primary transition-all"
-          style={{ width: `${progress}%` }}
-          aria-valuenow={progress}
-          aria-valuemin={0}
-          aria-valuemax={100}
-          role="progressbar"
-        />
-      </div>
+          <div className="mb-4 h-2 w-full rounded-full bg-muted">
+            <div
+              className="h-2 rounded-full bg-primary transition-all"
+              style={{ width: `${progress}%` }}
+              aria-valuenow={progress}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              role="progressbar"
+            />
+          </div>
 
           <StepNav current={current} onStepChange={setCurrent} />
           <Card>
@@ -253,22 +253,22 @@ export default function HomePage() {
               )}
 
               {current === 3 && (
-          <ExperienceStep
-            value={state.experience}
-            onChange={(experience) => {
-              console.log('Experience data being updated in state:', experience);
-              setState((s) => {
-                const updatedState = { ...s, experience };
-                console.log('Updated state with new experience data:', updatedState);
-                return updatedState;
-              });
-            }}
-            noexperienced={state.noexperienced}
-            onNoExperiencedChange={(noexperienced) => setState((s) => ({ ...s, noexperienced }))}
-            onPrev={prev}
-            onNext={next}
-          />
-        )}
+                <ExperienceStep
+                  value={state.experience}
+                  onChange={(experience) => {
+                    console.log('Experience data being updated in state:', experience);
+                    setState((s) => {
+                      const updatedState = { ...s, experience };
+                      console.log('Updated state with new experience data:', updatedState);
+                      return updatedState;
+                    });
+                  }}
+                  noexperienced={state.noexperienced}
+                  onNoExperiencedChange={(noexperienced) => setState((s) => ({ ...s, noexperienced }))}
+                  onPrev={prev}
+                  onNext={next}
+                />
+              )}
 
               {current === 4 && (
                 <EducationStep
@@ -751,10 +751,10 @@ function ExperienceStep({
 
       <div className="grid gap-2">
         <div className="flex items-center gap-2">
-          <Input 
-            placeholder="Add responsibility bullet" 
-            value={bullet} 
-            onChange={(e) => setBullet(e.target.value)} 
+          <Input
+            placeholder="Add responsibility bullet"
+            value={bullet}
+            onChange={(e) => setBullet(e.target.value)}
             disabled={noexperienced}
           />
           <Button type="button" onClick={addBullet} disabled={noexperienced}>
@@ -783,7 +783,7 @@ function ExperienceStep({
             I don't have any work experience
           </label>
         </div>
-        
+
         <div className="flex items-center gap-2">
           <Button variant="outline" onClick={onPrev}>
             Back
@@ -1068,7 +1068,7 @@ function ReviewStep({
 }) {
   const buildHtml = () => {
     const title = state.seoTitle || `${state.name || "My"} • Portfolio`
-    const desc = state.seoDescription || state.bio || "Personal portfolio generated with Portfolio Generator."
+    const desc = state.seoDescription || state.bio || "Personal portfolio generated with Resumify."
     const url = state.links.website || "" // used for canonical/og:url if provided
 
     // compute accent by color scheme
@@ -1114,8 +1114,7 @@ ${url ? `<meta property="og:url" content="${url}" />` : ""}
     <div class="muted">${esc(state.role || "Your Role")}</div>
     ${state.location ? `<div class="muted">${esc(state.location)}</div>` : ""}
     ${state.bio ? `<p>${esc(state.bio)}</p>` : ""}
-    ${
-      state.links?.website || state.links?.linkedin || state.links?.twitter || state.links?.email
+    ${state.links?.website || state.links?.linkedin || state.links?.twitter || state.links?.email
         ? `
     <div class="row">
       ${state.links.website ? `<a href="${state.links.website}">Website</a>` : ""}
@@ -1124,18 +1123,17 @@ ${url ? `<meta property="og:url" content="${url}" />` : ""}
       ${state.links.email ? `<a href="mailto:${state.links.email}">${state.links.email}</a>` : ""}
     </div>`
         : ""
-    }
+      }
   </header>
 
   <section class="card">
     <h2 class="accent">Projects</h2>
-    ${
-      state.selectedRepos.length
+    ${state.selectedRepos.length
         ? state.selectedRepos
-            .map((full) => {
-              const r = state.repos.find((x) => x.full_name === full)
-              const s = state.summaries?.[full] || []
-              return `<div class="grid">
+          .map((full) => {
+            const r = state.repos.find((x) => x.full_name === full)
+            const s = state.summaries?.[full] || []
+            return `<div class="grid">
           <strong>${esc(r?.name || full)}</strong>
           <div class="muted row">
             ${r?.language ? `<span>${esc(r.language)}</span>` : ""}
@@ -1145,19 +1143,18 @@ ${url ? `<meta property="og:url" content="${url}" />` : ""}
           </div>
           ${s.length ? `<ul class="list">${s.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>` : ""}
         </div>`
-            })
-            .join("")
+          })
+          .join("")
         : `<p class="muted">No projects selected.</p>`
-    }
+      }
   </section>
 
-  ${
-    state.experience.length
-      ? `<section class="card">
+  ${state.experience.length
+        ? `<section class="card">
     <h2 class="accent">Experience</h2>
     ${state.experience
-      .map(
-        (e) => `
+          .map(
+            (e) => `
       <div class="grid">
         <strong>${esc(e.title || "")} • ${esc(e.company || "")}</strong>
         <div class="muted">${esc(e.start || "")} - ${esc(e.end || "Present")}</div>
@@ -1165,19 +1162,18 @@ ${url ? `<meta property="og:url" content="${url}" />` : ""}
         ${e.tech ? `<div class="muted">Tech: ${esc(e.tech)}</div>` : ""}
       </div>
     `,
-      )
-      .join("")}
+          )
+          .join("")}
   </section>`
-      : ""
-  }
+        : ""
+      }
 
-  ${
-    state.education.length
-      ? `<section class="card">
+  ${state.education.length
+        ? `<section class="card">
     <h2 class="accent">Education</h2>
     ${state.education
-      .map(
-        (ed) => `
+          .map(
+            (ed) => `
       <div class="grid">
         <strong>${esc(ed.degree || "")} • ${esc(ed.institution || "")}</strong>
         <div class="muted">${esc(ed.field || "")} • ${esc(ed.year || "")}</div>
@@ -1185,11 +1181,11 @@ ${url ? `<meta property="og:url" content="${url}" />` : ""}
         ${ed.notes ? `<div>${esc(ed.notes)}</div>` : ""}
       </div>
     `,
-      )
-      .join("")}
+          )
+          .join("")}
   </section>`
-      : ""
-  }
+        : ""
+      }
 </div>
 </body>
 </html>`

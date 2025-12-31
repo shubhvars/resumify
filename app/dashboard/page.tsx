@@ -16,19 +16,19 @@ export default function DashboardPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
-  
+
   // Always initialize the hook, but we'll only use its values when on client side
   const resumeDataHook = useResumeData();
-  
+
   // Initialize with default values
   const [resumes, setResumes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   useEffect(() => {
     setIsClient(true);
   }, []);
-  
+
   // Only use the hook values when we're on the client side
   useEffect(() => {
     if (isClient && status === 'authenticated') {
@@ -37,7 +37,7 @@ export default function DashboardPage() {
       setError(resumeDataHook.error);
     }
   }, [isClient, status, resumeDataHook.resumes, resumeDataHook.loading, resumeDataHook.error, resumeDataHook]);
-  
+
   // Log the resume data for debugging
   useEffect(() => {
     if (isClient && status === 'authenticated') {
@@ -49,7 +49,7 @@ export default function DashboardPage() {
       }
     }
   }, [isClient, status, resumes]);
-  
+
   console.log('Dashboard: session:', session);
   console.log('Dashboard: session.user:', session?.user);
   console.log('Dashboard: session.user.id:', session?.user?.id);
@@ -72,7 +72,7 @@ export default function DashboardPage() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <h1 className="text-2xl font-semibold mb-4">Welcome to Resume Builder</h1>
+          <h1 className="text-2xl font-semibold mb-4">Welcome to Resumify</h1>
           <p className="text-muted-foreground mb-6">Please sign in to access your dashboard.</p>
           <Button onClick={() => router.push('/auth/signin')}>
             Sign In
@@ -124,7 +124,7 @@ export default function DashboardPage() {
               User ID: {session.user?.id || 'Not set'} | Email: {session.user?.email || 'Not set'}
             </div>
             <div className="text-xs text-muted-foreground mt-1">
-              <button 
+              <button
                 onClick={async () => {
                   if (session?.user?.id) {
                     try {
@@ -186,7 +186,7 @@ export default function DashboardPage() {
           <Button onClick={() => router.push('/builder')} size="lg">
             Create Your First Resume
           </Button>
-          </div>
+        </div>
       ) : (
         <div className="space-y-6">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -194,17 +194,17 @@ export default function DashboardPage() {
               const stats = getResumeStats(resume);
               return (
                 <Card key={resume.id} className="hover:shadow-md transition-shadow">
-              <CardHeader>
+                  <CardHeader>
                     <div className="flex items-start justify-between">
                       <div className="flex-1 min-w-0">
                         <CardTitle className="text-lg truncate">{resume.title}</CardTitle>
                         <p className="text-sm text-muted-foreground mt-1">
                           Last updated {stats.lastUpdated}
-                          </p>
-                        </div>
+                        </p>
                       </div>
-              </CardHeader>
-              <CardContent>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
                     <div className="space-y-4">
                       {/* Stats */}
                       <div className="grid grid-cols-3 gap-2 text-xs">
@@ -234,18 +234,18 @@ export default function DashboardPage() {
                         >
                           <Edit className="h-3 w-3 mr-1" />
                           Edit
-                          </Button>
-                        <Button 
+                        </Button>
+                        <Button
                           size="sm"
-                          variant="outline" 
+                          variant="outline"
                           onClick={() => router.push(`/resumes/${resume.id}`)}
                         >
                           <Eye className="h-3 w-3" />
                         </Button>
                       </div>
-                </div>
-              </CardContent>
-            </Card>
+                    </div>
+                  </CardContent>
+                </Card>
               );
             })}
           </div>
@@ -276,14 +276,14 @@ export default function DashboardPage() {
                 <div className="text-center">
                   <div className="text-2xl font-bold text-primary">
                     {resumes.reduce((acc, r) => acc + r.selectedRepos.length, 0)}
-              </div>
-                  <div className="text-sm text-muted-foreground">Total Projects</div>
                   </div>
+                  <div className="text-sm text-muted-foreground">Total Projects</div>
+                </div>
               </div>
             </CardContent>
           </Card>
         </div>
       )}
-      </div>
+    </div>
   );
 }

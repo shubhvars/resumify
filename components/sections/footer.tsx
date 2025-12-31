@@ -8,7 +8,7 @@ import { FileText, Github, Twitter, Linkedin, Mail } from "lucide-react"
 
 const footerLinks = {
   product: [
-    { name: "Resume Builder", href: "/builder" },
+    { name: "Resumify Builder", href: "/builder" },
     { name: "ATS Score Checker", href: "/ats-score" },
     { name: "Templates", href: "/template" },
     { name: "Dashboard", href: "/dashboard" }
@@ -50,7 +50,7 @@ export default function Footer() {
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <FileText className="w-4 h-4 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold">Resume Builder</span>
+              <span className="text-xl font-bold">Resumify</span>
             </Link>
             <p className="text-muted-foreground mb-6 max-w-md">
               Create professional, ATS-friendly resumes that help you stand out from the crowd.
@@ -145,10 +145,10 @@ export default function Footer() {
           className="flex flex-col md:flex-row justify-between items-center gap-4"
         >
           <p className="text-sm text-muted-foreground">
-            © 2025 Resume Builder. All rights reserved.
+            © 2025 Resumify. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <span>Built with ❤️ by the Resume Builder team</span>
+            <span>Built with ❤️ by the Resumify team</span>
           </div>
         </motion.div>
       </div>

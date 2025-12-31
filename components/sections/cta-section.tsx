@@ -30,7 +30,7 @@ export default function CTASection() {
             Create Your Perfect Resume Today
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Join thousands of professionals who have already transformed their job search with our AI-powered resume builder.
+            Join thousands of professionals who have already transformed their job search with Resumify.
           </p>
         </motion.div>
       </div>
@@ -45,7 +45,7 @@ export default function CTASection() {
           className="space-y-8"
         >
           <div>
-            <h3 className="text-2xl font-bold mb-4">Why Choose Our Resume Builder?</h3>
+            <h3 className="text-2xl font-bold mb-4">Why Choose Resumify?</h3>
             <div className="space-y-3">
               {features.map((feature, index) => (
                 <div key={index} className="flex items-center gap-3">

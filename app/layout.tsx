@@ -6,9 +6,9 @@ import { Providers } from '../components/providers'
 import './globals.css'
 import Navigation from '@/components/navigation'
 export const metadata: Metadata = {
-  title: 'Portfolio Generator',
-  description: 'Created with Shubh Varshney',
-  generator: 'Shubh Varshney',
+  title: 'Resumify',
+  description: 'AI-powered resume builder that helps you create professional, ATS-friendly resumes',
+  generator: 'Resumify Team',
 }
 
 export default function RootLayout({

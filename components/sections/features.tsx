@@ -4,12 +4,12 @@ import { motion } from "framer-motion"
 import { FileText, Brain, ShieldCheck, BarChart3, UserCircle2, Sparkles } from "lucide-react"
 
 const features = [
-  { title: "Resume builder from GitHub", icon: <FileText className="h-5 w-5" aria-hidden />, color: "#00D4FF" ,old:"Basic static functionality",new:"Upgraded, interactive, and intelligent"},
-  { title: "Dynamic dashboard", icon: <BarChart3 className="h-5 w-5" aria-hidden />, color: "#9B5BFF" ,old:"Not available",new:"Save user all data, dynamic memory"},
-  { title: "ATS score checker", icon: <ShieldCheck className="h-5 w-5" aria-hidden />, color: "#00FFA3" ,old:"Not available",new:"AI-powered ATS score checker"},
-  { title: "AI-powered enhancer", icon: <Brain className="h-5 w-5" aria-hidden />, color: "#00D4FF" ,old:"Not available",new:"AI-powered enhancer,skills suggestions"},
-  { title: "Professional templates", icon: <Sparkles className="h-5 w-5" aria-hidden />, color: "#9B5BFF" ,old:"Not available",new:"fully functional modern templates"},
-  { title: "Google authentication & profile", icon: <UserCircle2 className="h-5 w-5" aria-hidden />, color: "#00FFA3" ,old:"Not available",new:"secure, fast, and easy google authentication"},
+  { title: "Build resume from GitHub", icon: <FileText className="h-5 w-5" aria-hidden />, color: "#00D4FF", old: "Basic static functionality", new: "Upgraded, interactive, and intelligent" },
+  { title: "Dynamic dashboard", icon: <BarChart3 className="h-5 w-5" aria-hidden />, color: "#9B5BFF", old: "Not available", new: "Save user all data, dynamic memory" },
+  { title: "ATS score checker", icon: <ShieldCheck className="h-5 w-5" aria-hidden />, color: "#00FFA3", old: "Not available", new: "AI-powered ATS score checker" },
+  { title: "AI-powered enhancer", icon: <Brain className="h-5 w-5" aria-hidden />, color: "#00D4FF", old: "Not available", new: "AI-powered enhancer,skills suggestions" },
+  { title: "Professional templates", icon: <Sparkles className="h-5 w-5" aria-hidden />, color: "#9B5BFF", old: "Not available", new: "fully functional modern templates" },
+  { title: "Google authentication & profile", icon: <UserCircle2 className="h-5 w-5" aria-hidden />, color: "#00FFA3", old: "Not available", new: "secure, fast, and easy google authentication" },
 ]
 
 export default function Features() {
