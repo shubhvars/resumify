@@ -93,118 +93,118 @@ export const generateATSResults = async (resume: File, jobDescription: string, c
     }
   }
   `;
-  
-    const ai = genkit({
-        plugins: [googleAI()],
-      });
-      
-      const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY || '');
-      
-      // Convert File to Buffer
-      const resumeBuffer = Buffer.from(await resume.arrayBuffer());
 
-      const uploadResult = await fileManager.uploadFile(resumeBuffer, {
-        mimeType: 'application/pdf',
-        displayName: 'CV',
-      });
-      
-      const response = await ai.generate({
-        model: googleAI.model(process.env.GEMINI_MODEL || 'gemini-2.5-flash'),
-        prompt: [
-          { text: prompt || ''},
-          {
-            media: {
-              contentType: uploadResult.file.mimeType,
-              url: uploadResult.file.uri,
-            },
-          },
-        ],
-        // Note: responseSchema is not supported by gemini-1.5-flash model
-        /*config: {
-          responseMimeType: 'application/json',
-          responseSchema: {
+  const ai = genkit({
+    plugins: [googleAI()],
+  });
+
+  const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY || '');
+
+  // Convert File to Buffer
+  const resumeBuffer = Buffer.from(await resume.arrayBuffer());
+
+  const uploadResult = await fileManager.uploadFile(resumeBuffer, {
+    mimeType: 'application/pdf',
+    displayName: 'CV',
+  });
+
+  const response = await ai.generate({
+    model: googleAI.model(process.env.GEMINI_MODEL || 'gemini-2.5-pro'),
+    prompt: [
+      { text: prompt || '' },
+      {
+        media: {
+          contentType: uploadResult.file.mimeType,
+          url: uploadResult.file.uri,
+        },
+      },
+    ],
+    // Note: responseSchema is not supported by gemini-1.5-flash model
+    /*config: {
+      responseMimeType: 'application/json',
+      responseSchema: {
+        type: 'object',
+        properties: {
+          overallScore: { type: 'number' },
+          keywordAnalysis: {
             type: 'object',
             properties: {
-              overallScore: { type: 'number' },
-              keywordAnalysis: {
-                type: 'object',
-                properties: {
-                  keywordsMatched: {
-                    type: 'array',
-                    items: { type: 'string' },
-                  },
-                  keywordsMissing: {
-                    type: 'array',
-                    items: { type: 'string' },
-                  },
-                  skillGapAnalysis: {
-                    type: 'array',
-                    items: {
-                      type: 'object',
-                      properties: {
-                        skill: { type: 'string' },
-                        score: { type: 'number' },
-                      },
-                      required: ['skill', 'score'],
-                    },
-                  },
-                },
-                required: ['keywordsMatched', 'keywordsMissing', 'skillGapAnalysis'],
+              keywordsMatched: {
+                type: 'array',
+                items: { type: 'string' },
               },
-              experienceQualificationMatch: {
-                type: 'object',
-                properties: {
-                  experienceAlignment: { type: 'string' },
-                  educationAndCertifications: { type: 'string' },
-                },
-                required: ['experienceAlignment', 'educationAndCertifications'],
+              keywordsMissing: {
+                type: 'array',
+                items: { type: 'string' },
               },
-              atsCompatibility: {
-                type: 'object',
-                properties: {
-                  readabilityScore: { type: 'string' },
-                  readabilityNotes: { type: 'string' },
-                  fileType: { type: 'string' },
-                },
-                required: ['readabilityScore', 'readabilityNotes', 'fileType'],
-              },
-              detailedSuggestions: {
-                type: 'object',
-                properties: {
-                  summary: { type: 'string' },
-                  workExperience: { type: 'string' },
-                  skillsSection: { type: 'string' },
-                  overallRecommendations: {
-                    type: 'array',
-                    items: { type: 'string' },
+              skillGapAnalysis: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    skill: { type: 'string' },
+                    score: { type: 'number' },
                   },
+                  required: ['skill', 'score'],
                 },
-                required: ['summary', 'workExperience', 'skillsSection', 'overallRecommendations'],
               },
             },
-            required: ['overallScore', 'keywordAnalysis', 'experienceQualificationMatch', 'atsCompatibility', 'detailedSuggestions'],
+            required: ['keywordsMatched', 'keywordsMissing', 'skillGapAnalysis'],
+          },
+          experienceQualificationMatch: {
+            type: 'object',
+            properties: {
+              experienceAlignment: { type: 'string' },
+              educationAndCertifications: { type: 'string' },
+            },
+            required: ['experienceAlignment', 'educationAndCertifications'],
+          },
+          atsCompatibility: {
+            type: 'object',
+            properties: {
+              readabilityScore: { type: 'string' },
+              readabilityNotes: { type: 'string' },
+              fileType: { type: 'string' },
+            },
+            required: ['readabilityScore', 'readabilityNotes', 'fileType'],
+          },
+          detailedSuggestions: {
+            type: 'object',
+            properties: {
+              summary: { type: 'string' },
+              workExperience: { type: 'string' },
+              skillsSection: { type: 'string' },
+              overallRecommendations: {
+                type: 'array',
+                items: { type: 'string' },
+              },
+            },
+            required: ['summary', 'workExperience', 'skillsSection', 'overallRecommendations'],
           },
         },
-        */
-      });
-      
-      // The response object's types are misleading. We cast to 'any' to access the real structure.
-      const anyResponse = response as any;
-      console.log(anyResponse.text);
-      // The text is inside the `message.content` array. We loop through it and join the parts.
-      if (anyResponse.message && anyResponse.message.content && Array.isArray(anyResponse.message.content)) {
-        let fullText = '';
-        for (const part of anyResponse.message.content) {
-          if (part.text) {
-            fullText += part.text;
-          }
-        }
-        return fullText;
-      }
+        required: ['overallScore', 'keywordAnalysis', 'experienceQualificationMatch', 'atsCompatibility', 'detailedSuggestions'],
+      },
+    },
+    */
+  });
 
-      // Fallback if the structure is not as expected.
-      return "Error: Could not extract text from AI response.";
-} 
+  // The response object's types are misleading. We cast to 'any' to access the real structure.
+  const anyResponse = response as any;
+  console.log(anyResponse.text);
+  // The text is inside the `message.content` array. We loop through it and join the parts.
+  if (anyResponse.message && anyResponse.message.content && Array.isArray(anyResponse.message.content)) {
+    let fullText = '';
+    for (const part of anyResponse.message.content) {
+      if (part.text) {
+        fullText += part.text;
+      }
+    }
+    return fullText;
+  }
+
+  // Fallback if the structure is not as expected.
+  return "Error: Could not extract text from AI response.";
+}
 
 
 export const generateCoverLetter = async (
@@ -256,7 +256,7 @@ Your task is to write a fully personalized cover letter using the following inpu
   });
 
   const response = await ai.generate({
-    model: googleAI.model(process.env.GEMINI_MODEL || 'gemini-1.5-flash'),
+    model: googleAI.model(process.env.GEMINI_MODEL || 'gemini-1.5-pro'),
     prompt: [
       { text: prompt || '' },
       {
