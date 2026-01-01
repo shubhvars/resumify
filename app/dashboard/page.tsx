@@ -21,9 +21,9 @@ export default function DashboardPage() {
   const resumeDataHook = useResumeData();
 
   // Initialize with default values
-  const [resumes, setResumes] = useState([]);
+  const [resumes, setResumes] = useState<ResumeData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setIsClient(true);
