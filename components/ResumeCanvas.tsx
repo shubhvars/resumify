@@ -228,9 +228,11 @@ const ResumeCanvas = forwardRef<CanvasHandle, ResumeCanvasProps>(({
     }), []);
 
     return (
-        <div className="relative border rounded-lg overflow-auto shadow-lg bg-gray-100 p-4" style={{ maxHeight: '80vh' }}>
-            <div className="bg-white shadow-xl mx-auto" style={{ width: 1000, height: 1100 }}>
-                <canvas ref={canvasRef} />
+        <div className="relative border rounded-lg shadow-lg bg-gray-100" style={{ maxHeight: '85vh', overflowX: 'auto', overflowY: 'auto' }}>
+            <div className="p-4 inline-block min-w-full">
+                <div className="bg-white shadow-xl mx-auto" style={{ width: 1000, height: 1100 }}>
+                    <canvas ref={canvasRef} />
+                </div>
             </div>
             {!isReady && (
                 <div className="absolute inset-0 flex items-center justify-center bg-white/80">
